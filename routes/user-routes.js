@@ -11,5 +11,8 @@ router.route("/:id")
     .patch(userController.update)
     .delete(userController.remove)
 
+router.route("/:id/enjoys")
+    .get(userController.userEnjoys)
+    .post(userController.addUserEnjoys)
 
 module.exports = router;

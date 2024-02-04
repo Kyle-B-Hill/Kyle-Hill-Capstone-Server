@@ -14,7 +14,7 @@ const CORS_ORIGIN = process.env.CORS_ORIGIN || "http://localhost:3000";
 app.use(express.json())
 app.use(cors({ origin: CORS_ORIGIN }));
 app.use(`/user`, userRoutes);
-// app.use(`/enjoys`, enjoysRoutes);
+app.use(`/enjoys`, enjoysRoutes);
 // app.use(`/palominos`, palominosRoutes)
 
 app.get("/", (req, res) => {

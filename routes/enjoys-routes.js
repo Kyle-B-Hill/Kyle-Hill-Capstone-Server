@@ -1,16 +1,12 @@
-// const express = require("express");
-// const router = express.Router();
-// const inventoryController = require("../controllers/posts-controller");
+const express = require("express");
+const router = express.Router();
+const enjoysController = require("../controllers/enjoys-controller");
 
 
-// router.route("/")
-//     .get(postsController.index)
-//     .post(postsController.add)
-    
+router.route("/")
+    .get(enjoysController.index)
 
-// router.route("/:id")
-//     .get(postsController.findOne)
-//     .patch(postsController.update)
-//     .delete(postsController.remove)
+router.route("/:id")
+    .delete(enjoysController.removeUserEnjoys)
 
-// module.exports = router;
+module.exports = router;

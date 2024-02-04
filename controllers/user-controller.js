@@ -109,10 +109,44 @@ const remove = async (req, res) => {
     }
 };
 
+const userEnjoys = async(req, res) => {
+    try {
+        const enjoyedActivities = await knex("user").select(
+            "enjoys.id",
+            "activity_name"
+        )
+            .where({ 'enjoys.user_id': req.params.id })
+            .join("enjoys", "enjoys.user_id", "user.id");
+        res.json(enjoyedActivities)
+    } catch (err) {
+        res.status(500).json({
+            message: `Unable to retrieve enjoyed activities for user with Id ${req.params.id}: ${err}`
+        })
+    }
+}
+
+const addUserEnjoys = async (req, res) => {
+    try {
+        // front end has to send user_id as part of the req.body, use state
+        const result = await knex ("enjoys").insert(req.body);
+        const newActivityId = result[0];
+        const createdItem = await knex("enjoys").where({ id: newActivityId });
+        res.status(201).json(createdItem);
+    } catch(err) {
+        res.status(500).json({
+            message: `Unable to create new activity: ${err}`
+        })
+    }
+};
+
+
+
 module.exports = {
     index,
     findOne,
     add,
     update,
     remove,
+    userEnjoys,
+    addUserEnjoys,
 }
