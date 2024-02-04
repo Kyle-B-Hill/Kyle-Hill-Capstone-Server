@@ -4,16 +4,18 @@ const cors = require("cors");
 
 //set routes here
 const userRoutes = require("./routes/user-routes.js");
-// const postRoutes = require("./routes/post-routes.js");
+const enjoysRoutes = require("./routes/enjoys-routes.js");
+const palominosRoutes = require("./routes/palominos-routes.js");
 
 const app = express();
 const PORT = process.env.PORT || 5050;
 const CORS_ORIGIN = process.env.CORS_ORIGIN || "http://localhost:3000";
-const API_PREFIX = '/api'
 
 app.use(express.json())
 app.use(cors({ origin: CORS_ORIGIN }));
-app.use(`${API_PREFIX}/user`, userRoutes);
+app.use(`/user`, userRoutes);
+// app.use(`/enjoys`, enjoysRoutes);
+// app.use(`/palominos`, palominosRoutes)
 
 app.get("/", (req, res) => {
 	res.send("Welcome to InStock API!");
