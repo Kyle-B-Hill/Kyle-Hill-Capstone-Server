@@ -139,7 +139,18 @@ const addUserEnjoys = async (req, res) => {
     }
 };
 
-
+const findPalominos = async(req, res) => {
+    try {
+        const foundPalominos = await knex("user")
+            .where({ 'palominos.user_id': req.params.id })
+            .join("palominos", "palominos.user_id", "user.id");
+        res.json(foundPalominos)
+    } catch (err) {
+        res.status(500).json({
+            message: `Unable to retrieve palominos for user with Id ${req.params.id}: ${err}`
+        })
+    }
+}
 
 module.exports = {
     index,
@@ -149,4 +160,5 @@ module.exports = {
     remove,
     userEnjoys,
     addUserEnjoys,
+    findPalominos,
 }
