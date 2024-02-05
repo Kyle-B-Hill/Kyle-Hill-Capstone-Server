@@ -152,6 +152,26 @@ const findPalominos = async(req, res) => {
     }
 }
 
+const login = async(req, res) => {
+    try {
+        const user = await knex("user")
+            .where({ 
+                "user.user_name": req.body.user_name,
+                "user.password": req.body.password
+            })
+        if(user.length > 0) {
+           res.status(200).json(user); 
+        } else {
+            res.status(400).json({
+                message: `Unable to login user`
+            })
+        }
+    } catch (err) {
+        res.status(500).json({
+            message: `Server error ${err}`
+        })
+    }
+}
 module.exports = {
     index,
     findOne,
@@ -161,4 +181,5 @@ module.exports = {
     userEnjoys,
     addUserEnjoys,
     findPalominos,
+    login,
 }

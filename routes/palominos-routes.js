@@ -8,5 +8,5 @@ router.route("/")
   
 router.route("/:id")
     .get(palominosController.findPalominos)
-    
+  
 module.exports = router;
