@@ -29,14 +29,15 @@ const removeUserEnjoys = async (req, res) => {
 }
 
 const find = async (req, res) => {
+    console.log(req.params.Activity)
     try {
         const found = await knex("enjoys")
-            .where({ "activity_name": req.body.activity_name })
+            .where({ "activity_name": req.params.Activity })
             .join("user", "user.id", "enjoys.user_id")
         res.json(found)          
     } catch (err) {
         res.status(500).json({
-            message: `Unable to retrieve user matches for: ${req.body.activity_name}`
+            message: `Unable to retrieve user matches for: ${req.params.Activity}`
         })
     }
 }

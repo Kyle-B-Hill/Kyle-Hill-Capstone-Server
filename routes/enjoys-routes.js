@@ -9,7 +9,7 @@ router.route("/")
 router.route("/:id")
     .delete(enjoysController.removeUserEnjoys)
 
-router.route("/connect")
+router.route("/:Activity")
     .get(enjoysController.find)
 
 module.exports = router;
