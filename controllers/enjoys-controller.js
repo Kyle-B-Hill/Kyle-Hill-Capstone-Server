@@ -29,7 +29,6 @@ const removeUserEnjoys = async (req, res) => {
 }
 
 const find = async (req, res) => {
-    console.log(req.params.Activity)
     try {
         const found = await knex("enjoys")
             .where({ "activity_name": req.params.Activity })
